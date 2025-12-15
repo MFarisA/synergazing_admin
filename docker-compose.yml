@@ -5,13 +5,14 @@ services:
     restart: unless-stopped
     environment:
       - APP_ENV=local
-      - APP_URL=https://dev-admin.synergazing.app
+      - APP_URL=https://admindev.synergazing.app
       - DB_CONNECTION=pgsql
-      - DB_HOST=synergazing-db-dev    
+      - DB_HOST=synergazing-db-dev
       - DB_PORT=5432
-      - DB_DATABASE=synergazing_dev 
+      - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
+      - AUTORUN_ENABLED=true
     networks:
       - caddy_net_external
     deploy:
