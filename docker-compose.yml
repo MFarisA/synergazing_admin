@@ -6,11 +6,10 @@ services:
     environment:
       - APP_ENV=production
       - APP_URL=https://admin.synergazing.app
-      # Koneksi ke DB PROD
       - DB_CONNECTION=pgsql
       - DB_HOST=synergazing-db-prod
       - DB_PORT=5432
-      - DB_DATABASE=${DB_DATABASE} # (Pastikan sama dgn Backend Prod)
+      - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - AUTORUN_ENABLED=true
