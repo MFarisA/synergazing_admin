@@ -1,25 +1,19 @@
 services:
   admin:
     build: .
-    container_name: synergazing-admin
+    container_name: synergazing-admin-prod
     restart: unless-stopped
     environment:
       - APP_ENV=production
-      - APP_DEBUG=false
-      - APP_KEY=${APP_KEY}
       - APP_URL=https://admin.synergazing.app
-      
-      # KONEKSI DATABASE (Nembak ke container Backend)
+      # Koneksi ke DB PROD
       - DB_CONNECTION=pgsql
-      - DB_HOST=synergazing-db    # <--- Nama container DB di project backend
+      - DB_HOST=synergazing-db-prod
       - DB_PORT=5432
-      - DB_DATABASE=${DB_NAME}    # Pastikan nama DB sama dengan Backend
-      - DB_USERNAME=${DB_USER}
+      - DB_DATABASE=${DB_DATABASE} # (Pastikan sama dgn Backend Prod)
+      - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-      
-      # Settings untuk Image Serversideup
-      - PHP_OPCACHE_ENABLE=1
-      - AUTORUN_ENABLED=true      # Otomatis jalankan migrasi & cache saat start
+      - AUTORUN_ENABLED=true
     networks:
       - caddy_net_external
 
