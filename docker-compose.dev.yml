@@ -3,11 +3,11 @@ services:
     build: .
     container_name: synergazing-admin-dev
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 384M
+    # deploy:
+    # resources:
+    # limits:
+    # cpus: '0.50'
+    # memory: 384M
     volumes:
       - admin-storage-dev:/var/www/html/storage/app/public
       - ./.env:/var/www/html/.env
