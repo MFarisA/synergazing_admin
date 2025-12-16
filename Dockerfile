@@ -11,16 +11,16 @@ WORKDIR /var/www/html
 
 USER root
 
-RUN apt-get update && apt-get install -y php8.4-intl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN install-php-extensions intl
 
 COPY . .
+
 COPY --from=frontend_builder /app/public/build ./public/build
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN chown -R webuser:webgroup /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-USER webuser
+USER www-data
