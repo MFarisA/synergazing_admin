@@ -10,6 +10,7 @@ services:
           memory: 384M
     volumes:
       - admin-storage-prod:/var/www/html/storage/app/public
+      - ./.env:/var/www/html/.env
     environment:
       - APP_ENV=production
       - APP_URL=https://admin.synergazing.app
