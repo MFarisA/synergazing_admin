@@ -27,3 +27,6 @@ networks:
   caddy_net_external:
     external: true
     name: caddy_net
+
+volumes:
+  admin-storage-prod:
