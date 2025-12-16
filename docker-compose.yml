@@ -10,10 +10,12 @@ services:
           memory: 384M
     volumes:
       - admin-storage-dev:/var/www/html/storage/app/public
+      - ./.env:/var/www/html/.env
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
       - APP_URL=https://admindev.synergazing.app
+      - ASSET_URL=https://admindev.synergazing.app
       - DB_CONNECTION=pgsql
       - DB_HOST=synergazing-db-dev 
       - DB_PORT=5432
@@ -21,6 +23,10 @@ services:
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - AUTORUN_ENABLED=true
+      - AUTORUN_LARAVEL_MIGRATION=false
+      - SESSION_DRIVER=file
+      - CACHE_STORE=file
+      - LOG_CHANNEL=stderr
     networks:
       - caddy_net_external
 
