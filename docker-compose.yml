@@ -8,6 +8,8 @@ services:
         limits:
           cpus: '0.50'
           memory: 384M
+    volumes:
+      - admin-storage-prod:/var/www/html/storage/app/public
     environment:
       - APP_ENV=production
       - APP_URL=https://admin.synergazing.app
