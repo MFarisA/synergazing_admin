@@ -18,8 +18,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
-          memory: 512M
+          cpus: '0.30'
+          memory: 300M
 
 networks:
   caddy_net_external:
