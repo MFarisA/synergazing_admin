@@ -20,7 +20,8 @@ services:
         limits:
           cpus: '0.30'
           memory: 300M
-
+    volumes:
+      - admin-storage-dev:/var/www/html/storage/app/public
 networks:
   caddy_net_external:
     external: true
