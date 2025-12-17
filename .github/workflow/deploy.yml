@@ -1,0 +1,22 @@
+name: Deploy Admin DEV to Tencent
+
+on:
+  push:
+    branches:
+      - dev-admin
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, dev-admin]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Docker
+        run: |
+          docker compose -f docker-compose.dev.yml up -d --build
+
+      - name: Cleanup Old Images
+        run: |
+          docker image prune -f
