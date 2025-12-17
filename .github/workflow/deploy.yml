@@ -5,20 +5,26 @@ on:
     branches:
       - dev-admin
       - main
+  workflow_dispatch:
 
 jobs:
   deploy-dev:
-    if: github.ref == 'refs/heads/dev-admin'
+    if: github.ref == 'refs/heads/dev-admin' || github.event_name == 'workflow_dispatch'
     runs-on: [self-hosted, dev-admin]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Deploy DEV
         run: docker compose -f docker-compose.dev.yml up -d --build
+
 
   deploy-prod:
     if: github.ref == 'refs/heads/main'
     runs-on: [self-hosted, main]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Deploy PROD
         run: docker compose -f docker-compose.prod.yml up -d --build
