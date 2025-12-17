@@ -17,7 +17,7 @@ jobs:
 
   deploy-prod:
     if: github.ref == 'refs/heads/main'
-    runs-on: [self-hosted, prod-admin]
+    runs-on: [self-hosted, main]
     steps:
       - uses: actions/checkout@v4
       - name: Deploy PROD
