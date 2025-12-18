@@ -3,11 +3,6 @@ services:
     build: .
     container_name: synergazing-admin-prod
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 384M
     volumes:
       - admin-storage-prod:/var/www/html/storage/app/public
       - ./.env:/var/www/html/.env
