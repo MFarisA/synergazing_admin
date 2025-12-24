@@ -1,0 +1,22 @@
+name: Dev Environment Deploy
+
+on:
+  push:
+    branches:
+      - dev-admin
+  workflow_dispatch:
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev-admin'
+    runs-on: [self-hosted, dev-admin]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Pull Latest Code
+        run: git pull origin dev-admin
+
+      - name: Deploy DEV
+        run: docker compose -f docker-compose.dev.yml up -d --build

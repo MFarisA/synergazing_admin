@@ -1,0 +1,31 @@
+services:
+  admin:
+    build: .
+    container_name: synergazing-admin-dev
+    restart: unless-stopped
+    # deploy:
+    # resources:
+    # limits:
+    # cpus: '0.50'
+    # memory: 384M
+    volumes:
+      - admin-storage-dev:/var/www/html/storage/app/public
+      - ./.env:/var/www/html/.env
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_URL=https://admindev.synergazing.app
+      - ASSET_URL=https://admindev.synergazing.app
+      - AUTORUN_ENABLED=true
+      - AUTORUN_LARAVEL_MIGRATION=false
+      - LOG_CHANNEL=stderr
+    networks:
+      - caddy_net_external
+
+networks:
+  caddy_net_external:
+    external: true
+    name: caddy_net
+
+volumes:
+  admin-storage-dev:
