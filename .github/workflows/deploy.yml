@@ -1,30 +1,24 @@
-name: Multi-Environment Deploy
+name: Production Deploy
 
 on:
   push:
     branches:
-      - dev-admin
       - main
-  workflow_dispatch:
 
 jobs:
-  deploy-dev:
-    if: github.ref == 'refs/heads/dev-admin' || github.event_name == 'workflow_dispatch'
-    runs-on: [self-hosted, dev-admin]
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Deploy DEV
-        run: docker compose -f docker-compose.dev.yml up -d --build
-
-
   deploy-prod:
-    if: github.ref == 'refs/heads/main'
-    runs-on: [self-hosted, main]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Deploy PROD
-        run: docker compose -f docker-compose.prod.yml up -d --build
+      - name: Deploy to Prod
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd synergazing_admin
+            git pull origin main
+            docker compose -f docker-compose.prod.yml up -d --build
