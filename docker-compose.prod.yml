@@ -1,7 +1,7 @@
 services:
   admin:
     build: .
-    container_name: synergazing-admin-prod
+    container_name: synergazing-admin
     restart: unless-stopped
     volumes:
       - admin-storage-prod:/var/www/html/storage/app/public
@@ -11,7 +11,7 @@ services:
       - APP_URL=${APP_URL}
       - APP_KEY=${APP_KEY}
       - DB_CONNECTION=pgsql
-      - DB_HOST=synergazing-db-prod
+      - DB_HOST=synergazing-db
       - DB_PORT=5432
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
@@ -20,12 +20,11 @@ services:
       - AUTORUN_LARAVEL_MIGRATION=false
       - LOG_CHANNEL=stderr
     networks:
-      - caddy_net_external
+      - caddy_net
 
 networks:
-  caddy_net_external:
+  caddy_net:
     external: true
-    name: caddy_net
 
 volumes:
   admin-storage-prod:
